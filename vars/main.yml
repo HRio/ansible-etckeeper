@@ -12,3 +12,15 @@ commit: true
 
 # Perform commit for etckeeper pre-play task (requires commit as well)
 precommit: true
+
+vcs_pkg: "{% if etckeeper_vcs == 'bzr' %}bzr\
+{% elif etckeeper_vcs == 'git' %}git\
+{% elif etckeeper_vcs == 'hg' %}mercurial\
+{% elif etckeeper_vcs == 'darcs' %}darcs\
+{% endif %}"
+
+vcs_ignore: "{% if etckeeper_vcs == 'darcs' %}
+.*-
+{% else %}
+*-
+{% endif %}"

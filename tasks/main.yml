@@ -24,10 +24,7 @@
   apt: pkg={{ item }} state=installed
        install_recommends=no
   with_items:
-  - "{% 'bzr' if etckeeper_vcs == 'bzr' %}"
-  - "{% 'git-common' if etckeeper_vcs == 'git' %}"
-  - "{% 'mercurial-common' if etckeeper_vcs == 'hg' %}"
-  - "{% 'darcs' if etckeeper_vcs == 'darcs' %}"
+    - "{{vcs_pkg}}"
   when: install and result|changed
 
 - name: Set etckeeper VCS
@@ -48,8 +45,8 @@
   with_items:
   - '# begin section managed by etckeeper (do not edit this section by hand)'
   - '# end section managed by etckeeper'
-  - '# ignore {passwd,group,shadow,gshadow}- backup files'
-  - '{% "." if etckeeper_vcs == darcs %}*-'
+  - '# ignore {passwd,group,shadow,gshadow,subuid,subgid}- backup files'
+  - "{{ vcs_ignore }}"
   when: install and result|changed
 
 - name: Initialize etckeeper
