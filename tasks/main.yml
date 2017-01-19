@@ -61,5 +61,7 @@
 
 - name: Record unsaved changes in etckeeper
   shell: "if etckeeper unclean;
-          then etckeeper commit '{{ etckeeper_pre_message }}'; fi"
+          then etckeeper commit '{{ etckeeper_pre_message }}'; else echo 'etckeeper clean'; fi"
   when: precommit and commit and not (install and result|changed)
+  register: etc_clean
+  changed_when: "'etckeeper clean' not in etc_clean.stdout"
