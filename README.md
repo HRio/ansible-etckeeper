@@ -8,7 +8,7 @@ Ansible role to install, configure, and use etckeeper.
 Requirements
 ------------
 
-* Developed and tested with Ansible 1.5, but should work with 1.3 or later.
+* Developed and tested with Ansible 2.x.
 * Debian/Ubuntu system (python-apt needed) [Patches to support yum welcomed!]
 
 Role Variables
