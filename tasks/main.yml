@@ -4,6 +4,13 @@
 ---
 # tasks file for etckeeper
 
+- name: Install etckeeper VCS
+  apt: pkg={{ item }} state=installed
+       install_recommends=no
+  with_items:
+    - "{{vcs_pkg}}"
+  when: install
+
 - name: Install etckeeper
   apt: pkg=etckeeper state=installed
        install_recommends=no
@@ -19,13 +26,6 @@
   register: result
   notify: Record changes in etckeeper
   when: install
-
-- name: Install etckeeper VCS
-  apt: pkg={{ item }} state=installed
-       install_recommends=no
-  with_items:
-    - "{{vcs_pkg}}"
-  when: install and result|changed
 
 - name: Set etckeeper VCS
   lineinfile: dest=/etc/etckeeper/etckeeper.conf state=present
