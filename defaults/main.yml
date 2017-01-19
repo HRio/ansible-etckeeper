@@ -15,3 +15,13 @@ etckeeper_message:
 # Commit message for etckeeper pre-play task
 etckeeper_pre_message:
   "saving uncommitted changes in /etc prior to running Ansible play"
+
+# Perform installation and initialization of etckeeper
+install: false
+
+# Perform notification for etckeeper handler commit
+commit: true
+
+# Perform commit for etckeeper pre-play task (requires commit as well)
+precommit: true
+

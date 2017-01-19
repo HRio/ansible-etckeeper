@@ -4,15 +4,6 @@
 ---
 # vars file for etckeeper
 
-# Perform installation and initialization of etckeeper
-install: false
-
-# Perform notification for etckeeper handler commit
-commit: true
-
-# Perform commit for etckeeper pre-play task (requires commit as well)
-precommit: true
-
 vcs_pkg: "{% if etckeeper_vcs == 'bzr' %}bzr\
 {% elif etckeeper_vcs == 'git' %}git\
 {% elif etckeeper_vcs == 'hg' %}mercurial\
