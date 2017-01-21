@@ -36,7 +36,7 @@
 - name: Maybe fix etckeeper unclean
   lineinfile: dest=/etc/etckeeper/unclean.d/50test state=present
               regexp=' -d \.git'
-              line='       [ -d .git ] && [ -n "`git status --porcelain`" ]'
+              line='	[ -d .git ] && [ -n "`git status --porcelain`" ]'
   when: install and result|changed
 
 - name: Ignore password/group/shadow backups
