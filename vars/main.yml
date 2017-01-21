@@ -10,8 +10,6 @@ vcs_pkg: "{% if etckeeper_vcs == 'bzr' %}bzr\
 {% elif etckeeper_vcs == 'darcs' %}darcs\
 {% endif %}"
 
-vcs_ignore: "{% if etckeeper_vcs == 'darcs' %}
-.*-
-{% else %}
-*-
-{% endif %}"
+vcs_ignore: "{% if etckeeper_vcs == 'darcs' %}\
+.*-{% else %}\
+*-{% endif %}"

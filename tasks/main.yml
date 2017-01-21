@@ -29,7 +29,7 @@
 
 - name: Set etckeeper VCS
   lineinfile: dest=/etc/etckeeper/etckeeper.conf state=present
-              regexp='^VCS=' line='VCS={{ etckeeper_vcs }}'
+              regexp='^VCS=' line='VCS=\"{{ etckeeper_vcs }}\"'
   when: install and result|changed
 
 # fix `etckeeper unclean` if necessary (from etckeeper.git commit aeb50b5)
@@ -46,7 +46,7 @@
   - '# begin section managed by etckeeper (do not edit this section by hand)'
   - '# end section managed by etckeeper'
   - '# ignore {passwd,group,shadow,gshadow,subuid,subgid}- backup files'
-  - "{{ vcs_ignore }}"
+  - '{{vcs_ignore}}'
   when: install and result|changed
 
 - name: Initialize etckeeper
