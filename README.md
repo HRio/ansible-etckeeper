@@ -116,13 +116,13 @@ installations and commits, and also uses a shell action to perform commits.
         shell: if etckeeper unclean; then etckeeper commit '3rd play pt. 1'; fi
         when: result|changed
       - name: Do something that doesn't change anything in /etc
-        action: true
+        action: hello name='World'
       - name: Do something else that could change something in /etc
-        action: cp /dev/null /etc/zero
+        shell: cp /dev/null /etc/zero
         notify: Record other changes for this play in etckeeper commit
-     handlers:
-     - name: Record other changes for this play in etckeeper commit
-       shell: if etckeeper unclean; then etckeeper commit '3rd play pt. 2'; fi
+      handlers:
+      - name: Record other changes for this play in etckeeper commit
+        shell: if etckeeper unclean; then etckeeper commit '3rd play pt. 2'; fi
 
 License
 -------
