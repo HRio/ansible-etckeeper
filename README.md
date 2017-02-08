@@ -66,7 +66,7 @@ None.
 
 
 Example Playbook
--------------------------
+----------------
 
 This role (and nothing else) should be the first play in a playbook,
 and ideally you would run it as the very first play on any server,
@@ -132,6 +132,6 @@ MIT (Expat) - see LICENSE file for details
 Author Information
 ------------------
 
-You can contact me at [alex.dupuy mac.com](mailto:alex.dupuy%40mac.com);
-check out my other open source contributions at
-[Ohloh](https://www.ohloh.net/accounts/dupuy/).
+You can contact the original author [alex.dupuy mac.com](mailto:alex.dupuy%40mac.com);
+
+This fork is maintained by Henrik Riomar
