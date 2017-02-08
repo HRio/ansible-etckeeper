@@ -1,5 +1,5 @@
-etckeeper
-=========
+ansible-etckeeper
+=================
 
 Ansible role to install, configure, and use etckeeper.
 
@@ -97,13 +97,13 @@ installations and commits, and also uses a shell action to perform commits.
       vars:
       - etckeeper_vcs: git
       roles:
-      - { role: etckeeper, install: true }
+      - { role: ansible-etckeeper, install: true }
       # Do not add any other roles to this play
 
     # This is the second play
     - hosts: all
       roles:
-      - { role: etckeeper, etckeeper_message: '2nd play of playbook' }
+      - { role: ansible-etckeeper, etckeeper_message: '2nd play of playbook' }
       # additional roles here
 
     # This is the third play
@@ -116,7 +116,7 @@ installations and commits, and also uses a shell action to perform commits.
         shell: if etckeeper unclean; then etckeeper commit '3rd play pt. 1'; fi
         when: result|changed
       - name: Do something that doesn't change anything in /etc
-        action: hello name='World'
+        stat: path='/etc/.etckeeper.initialized'
       - name: Do something else that could change something in /etc
         shell: cp /dev/null /etc/zero
         notify: Record other changes for this play in etckeeper commit
