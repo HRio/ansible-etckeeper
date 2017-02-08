@@ -1,14 +1,14 @@
-etckeeper
-=========
+ansible-etckeeper
+=================
 
 Ansible role to install, configure, and use etckeeper.
 
-[![Build Status](https://travis-ci.org/expansible/etckeeper.svg?branch=master)](https://travis-ci.org/expansible/etckeeper)
+[![Build Status](https://travis-ci.org/HRio/ansible-etckeeper.svg?branch=master)](https://travis-ci.org/HRio/ansible-etckeeper)
 
 Requirements
 ------------
 
-* Developed and tested with Ansible 1.5, but should work with 1.3 or later.
+* Developed and tested with Ansible 2.x.
 * Debian/Ubuntu system (python-apt needed) [Patches to support yum welcomed!]
 
 Role Variables
@@ -66,7 +66,7 @@ None.
 
 
 Example Playbook
--------------------------
+----------------
 
 This role (and nothing else) should be the first play in a playbook,
 and ideally you would run it as the very first play on any server,
@@ -97,13 +97,13 @@ installations and commits, and also uses a shell action to perform commits.
       vars:
       - etckeeper_vcs: git
       roles:
-      - { role: etckeeper, install: true }
+      - { role: ansible-etckeeper, install: true }
       # Do not add any other roles to this play
 
     # This is the second play
     - hosts: all
       roles:
-      - { role: etckeeper, etckeeper_message: '2nd play of playbook' }
+      - { role: ansible-etckeeper, etckeeper_message: '2nd play of playbook' }
       # additional roles here
 
     # This is the third play
@@ -116,13 +116,13 @@ installations and commits, and also uses a shell action to perform commits.
         shell: if etckeeper unclean; then etckeeper commit '3rd play pt. 1'; fi
         when: result|changed
       - name: Do something that doesn't change anything in /etc
-        action: true
+        stat: path='/etc/.etckeeper.initialized'
       - name: Do something else that could change something in /etc
-        action: cp /dev/null /etc/zero
+        shell: cp /dev/null /etc/zero
         notify: Record other changes for this play in etckeeper commit
-     handlers:
-     - name: Record other changes for this play in etckeeper commit
-       shell: if etckeeper unclean; then etckeeper commit '3rd play pt. 2'; fi
+      handlers:
+      - name: Record other changes for this play in etckeeper commit
+        shell: if etckeeper unclean; then etckeeper commit '3rd play pt. 2'; fi
 
 License
 -------
@@ -132,6 +132,6 @@ MIT (Expat) - see LICENSE file for details
 Author Information
 ------------------
 
-You can contact me at [alex.dupuy mac.com](mailto:alex.dupuy%40mac.com);
-check out my other open source contributions at
-[Ohloh](https://www.ohloh.net/accounts/dupuy/).
+You can contact the original author [alex.dupuy mac.com](mailto:alex.dupuy%40mac.com);
+
+This fork is maintained by Henrik Riomar
