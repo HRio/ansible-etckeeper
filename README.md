@@ -13,7 +13,7 @@ Requirements
 
 Role Variables
 --------------
-There are three parameter variables (with defaults in the role tasks file):
+There are three parameter variables (with defaults in ``defaults/main.yml``):
 
 * **install** - *boolean* (default is **false**)
 
