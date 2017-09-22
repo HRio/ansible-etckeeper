@@ -11,15 +11,22 @@ before_install:
  - sudo apt-get install -qq python-apt python-pycurl
  - sudo git config --global user.name "root"
  - sudo git config --global user.email root@localhost
+ - sudo git config --global -l
 install:
   - pip install ansible==$ANSIBLE_VERSION
 script:
   - echo localhost > inventory
   - sed -n -e 's/^    //p' README.md > test.yml
-  - "printf '[defaults]\nroles_path = ../' > ansible.cfg"
+  - printf '[defaults]\nroles_path = ../\n' > ansible.cfg
   - ansible-playbook --syntax-check -i inventory test.yml
   - ansible-playbook -i inventory test.yml --connection=local --sudo
+  - dpkg -l | fgrep git
+  - dpkg -l | fgrep etc
   - sudo git -C /etc log
+  - ls -l /etc/
+  - ls -l /etc/.etckeeper
+  - ls -l /etc/.etckeeper.initialized
+  - sudo ls -l /etc/.git
 notifications:
   email:
     on_failure: always
