@@ -4,18 +4,27 @@
 ---
 # tasks file for etckeeper
 
-- name: Install etckeeper VCS
+- name: Install etckeeper VCS (Debian family)
   apt: pkg={{ item }} state=installed
        install_recommends=no
   with_items:
     - "{{vcs_pkg}}"
-  when: install
+  when: install and ansible_os_family == "Debian"
+- name: Install etckeeper VCS (!Debian family)
+  package: name={{ item }} state=installed
+  with_items:
+    - "{{vcs_pkg}}"
+  when: install and ansible_os_family != "Debian"
 
-- name: Install etckeeper
+- name: Install etckeeper (Debian family)
   apt: pkg=etckeeper state=installed
        install_recommends=no
   notify: Record changes in etckeeper
-  when: install
+  when: install and ansible_os_family == "Debian"
+- name: Install etckeeper (!Debian family)
+  package: name=etckeeper state=installed
+  notify: Record changes in etckeeper
+  when: install and ansible_os_family != "Debian"
 
 # This won't run if install file exists, so result.changed will be false,
 # thereby suppressing other install tasks.  Install file is created by the
