@@ -7,6 +7,8 @@ env:
 before_install:
  - sudo apt-get update -qq
  - sudo apt-get install -qq python-apt python-pycurl
+ - sudo git config --global user.name "root"
+ - sudo git config --global user.email root@localhost
 install:
   - pip install ansible==$ANSIBLE_VERSION
 script:
