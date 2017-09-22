@@ -12,7 +12,7 @@ install:
 script:
   - echo localhost > inventory
   - sed -n -e 's/^    //p' README.md > test.yml
-  - "printf '[defaults]\nroles_path = ../' > ansible.cfg"
+  - printf '[defaults]\nroles_path = ../\n' > ansible.cfg
   - ansible-playbook --syntax-check -i inventory test.yml
   - ansible-playbook -i inventory test.yml --connection=local --sudo
   - sudo git -C /etc log
